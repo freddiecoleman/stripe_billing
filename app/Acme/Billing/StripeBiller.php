@@ -1,7 +1,7 @@
-<?php
+<?php namespace Acme\Billing;
 
 use Acme\Interfaces\BillerInterface;
-use Acme\Interfaces\BilllingNotifierInterface;
+use Acme\Interfaces\BillingNotifierInterface;
 
 class StripeBiller implements BillerInterface {
 

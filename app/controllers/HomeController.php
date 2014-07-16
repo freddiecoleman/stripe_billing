@@ -1,13 +1,17 @@
 <?php
 
-use Acme\Billing\StripeBiller;
+use Acme\Interfaces\BillerInterface;
 
 class HomeController extends BaseController {
 
+  public function __construct(BillerInterface $biller)
+  {
+    $this->biller = $biller;
+  }
+
 	public function index()
 	{
-    $biller = new StripeBiller(new SmsNotifier);
-    dd($biller);
+    dd($this->biller);
 		return View::make('hello');
 	}
 
