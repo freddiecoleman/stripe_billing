@@ -34,12 +34,10 @@
 
     stripeResponseHandler : function(status, response){
 
-      this.submitButton.val(this.submitButtonValue);
-
       if (response.error) {
 
         this.form.find('.payment-errors').show().text(response.error.message);
-        return this.submitButton.prop('disabled', false);
+        return this.submitButton.prop('disabled', false).val(this.submitButtonValue);
 
       }
 
