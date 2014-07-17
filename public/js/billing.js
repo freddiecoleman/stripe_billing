@@ -24,7 +24,7 @@
 
     sendToken: function(event) {
 
-      this.submitButton.val('One moment (spinny icon)');
+      this.submitButton.val('One moment (spinny icon)').prop('disabled', true);
 
       Stripe.createToken(this.form, $.proxy(this.stripeResponseHandler, this));
 
@@ -38,7 +38,8 @@
 
       if (response.error) {
 
-        return this.form.find('.payment-errors').show().text(response.error.message);
+        this.form.find('.payment-errors').show().text(response.error.message);
+        return this.submitButton.prop('disabled', false);
 
       }
 
