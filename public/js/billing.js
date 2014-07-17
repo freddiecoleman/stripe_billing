@@ -6,6 +6,7 @@
 
       this.form = $('#billing-form');
       this.submitButton = this.form.find('input[type=submit]');
+      this.submitButtonValue = this.submitButton.val();
 
       var stripeKey = $('meta[name="publishable-key"]').attr('content');
 
@@ -32,6 +33,8 @@
     },
 
     stripeResponseHandler : function(status, response){
+
+      this.submitButton.val(this.submitButtonValue);
 
       if (response.error) {
 
