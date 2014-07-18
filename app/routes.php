@@ -14,6 +14,10 @@ Route::get('buy', function(){
 
 Route::post('buy', function(){
 
-  dd(Input::all());
+  $biller = App::make('Acme\Interfaces\BillerInterface');
+  return $biller->bill([
+    'email' => Input::get('email'),
+    'token' => Input::get('stripe-token')
+  ]);
 
 });

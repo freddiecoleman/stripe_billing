@@ -2,18 +2,47 @@
 
 use Acme\Interfaces\BillerInterface;
 use Acme\Interfaces\BillingNotifierInterface;
+use Stripe;
+use Stripe_Charge;
+use Config;
 
 class StripeBiller implements BillerInterface {
 
   public function __construct(BillingNotifierInterface $notifier)
   {
-    $this->notifier = $notifier;
+    Stripe::setApiKey(Config::get('stripe.secret_key'));
+    //$this->notifier = $notifier;
   }
 
-  public function bill(array $user, $amount)
+  public function bill(array $data)
   {
 
-    $this->notifier->notify($user, $amount);
+    try
+    {
+
+      return Stripe_Charge::create([
+        'amount' => 1000,
+        'currency' => 'usd',
+        'description' => $data['email'],
+        'card' => $data['stripe-token']
+      ]);
+
+      //return $this->notifier->notify($user, $amount);
+
+    }
+
+    catch(Stripe_CardError $e)
+    {
+
+      // card was declined
+
+      dd('card was declined');
+
+    }
+
+    
+
+    
 
   }
 
