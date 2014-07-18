@@ -24,7 +24,7 @@ class StripeBiller implements BillerInterface {
         'amount' => 1000,
         'currency' => 'usd',
         'description' => $data['email'],
-        'card' => $data['stripe-token']
+        'card' => $data['token']
       ]);
 
       //return $this->notifier->notify($user, $amount);
