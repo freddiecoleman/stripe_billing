@@ -20,14 +20,16 @@ class StripeBiller implements BillerInterface {
     try
     {
 
-      return Stripe_Charge::create([
+      Stripe_Charge::create([
         'amount' => 1000,
         'currency' => 'usd',
         'description' => $data['email'],
         'card' => $data['token']
       ]);
 
-      //return $this->notifier->notify($user, $amount);
+      //$this->notifier->notify($user, $amount);
+
+      return 'Charge was succesful';
 
     }
 
